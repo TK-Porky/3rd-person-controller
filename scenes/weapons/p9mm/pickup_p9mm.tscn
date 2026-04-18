@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1ajevr7e4q4"]
+
+[ext_resource type="PackedScene" uid="uid://bdd8lrlabf8tj" path="res://scenes/interactables/interactable.tscn" id="1_3we23"]
+[ext_resource type="Script" uid="uid://jlu7bxj5clf3" path="res://scripts/WeaponPickup.gd" id="2_b7ayl"]
+[ext_resource type="PackedScene" uid="uid://b21wmairl0bvp" path="res://scenes/weapons/p9mm/p9mm.tscn" id="3_4rsbs"]
+[ext_resource type="Resource" uid="uid://bdb6cy3dkmswy" path="res://scenes/weapons/p9mm/pistol.tres" id="3_b7ayl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g50hl"]
+
+[node name="PickupP9mm" instance=ExtResource("1_3we23")]
+script = ExtResource("2_b7ayl")
+weapon_data = ExtResource("3_b7ayl")
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019470239, 0.004541006, 0.06427002)
+shape = SubResource("SphereShape3D_g50hl")
+
+[node name="P9mm" parent="." index="1" instance=ExtResource("3_4rsbs")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)

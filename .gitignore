@@ -1,0 +1,33 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*~
+
+# Import files
+*.import
+
+# Build outputs
+/export/
+/build/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.editorconfig
+
+# Godot specific
+*.tscn.import
+*.scn.import
+*.res.import
+*.tres.import
+*.gdshader.import
+
+# Log files
+*.log

@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3kr4mvn5318j"]
+
+[ext_resource type="Script" uid="uid://bcvhts48ewyjl" path="res://scripts/Hud/Hud.gd" id="1_cgeww"]
+[ext_resource type="Script" uid="uid://6fon42efx470" path="res://scripts/Hud/DebugPanel.gd" id="2_c45xl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v2ag"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgeww"]
+bg_color = Color(0.10872076, 0.10872077, 0.10872071, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.067437805, 0.06743773, 0.06743767, 1)
+border_blend = true
+
+[node name="HUD" type="CanvasLayer"]
+layer = -1
+script = ExtResource("1_cgeww")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="DebugPanel" type="PanelContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 125)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("2_c45xl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/DebugPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer/DebugPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Crosshair" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3v2ag")
+
+[node name="InteractionContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -98.0
+offset_right = 62.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="InteractionKey" type="Panel" parent="InteractionContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cgeww")
+
+[node name="Label" type="Label" parent="InteractionContainer/InteractionKey"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 34.0
+offset_bottom = 35.0
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionPrompt" type="Label" parent="InteractionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "INTERACT"
