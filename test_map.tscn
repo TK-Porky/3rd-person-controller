@@ -245,18 +245,8 @@ size = Vector3(9.451599, 4.9050293, 10.658936)
 
 [node name="Player" parent="." instance=ExtResource("2_4wuf8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05372864, -0.0016446486, -0.0059432983)
-move_speed = 3.0
-sprint_speed = 5.0
 acceleration = 50.0
 jump_impusle = 12.0
-gravity_multiplier = 1.0
-rotation_speed = 12.0
-normal_height = 2.0
-crouch_height = 1.0
-crouch_speed = 2.0
-crouch_transition_speed = 0.2
-cover_move_speed = 3.0
-cover_snap_speed = 8.0
 
 [node name="SmallBox" type="CSGBox3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.7159176, 0.4448923, -9.537923)

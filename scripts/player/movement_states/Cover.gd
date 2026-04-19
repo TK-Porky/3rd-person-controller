@@ -156,6 +156,7 @@ func _handle_cover_movement() -> void:
 
 func _handle_lean(delta: float) -> void:
 	var wants_aim := player.input.aim_pressed
+	var wall_right := _cover_normal.cross(Vector3.UP).normalized()
 	
 	if not wants_aim:
 		_set_leaning(false, LeanSide.NONE)
@@ -168,12 +169,15 @@ func _handle_lean(delta: float) -> void:
 
 		if abs(_lateral_input) < 0.1:
 			if at_real_right_edge:
-				_set_leaning(true, LeanSide.RIGHT)
+				var right_offset := wall_right * LEAN_DISTANCE
+				if _has_floor_at_lean_target(right_offset):
+					_set_leaning(true, LeanSide.RIGHT)
 			elif at_real_left_edge:
-				_set_leaning(true, LeanSide.LEFT)
+				var left_offset := -wall_right * LEAN_DISTANCE
+				if _has_floor_at_lean_target(left_offset):
+					_set_leaning(true, LeanSide.LEFT)
 	
 	# Calculate the offset of the movement
-	var wall_right := _cover_normal.cross(Vector3.UP).normalized()
 	var target_offset := Vector3.ZERO
 	
 	match _lean_side:
@@ -279,3 +283,16 @@ func _orient_skin(delta: float) -> void:
 		skin_target_angle,
 		player.rotation_speed * delta
 	)
+
+func _has_floor_at_lean_target(target_offset: Vector3) -> bool:
+	var space_state := player.get_world_3d().direct_space_state
+	
+	var lean_target := _base_cover_position + target_offset
+	var ray_start   := lean_target + Vector3.UP * 0.1
+	var ray_end     := lean_target + Vector3.DOWN * 1.0
+
+	var query := PhysicsRayQueryParameters3D.create(ray_start, ray_end)
+	query.exclude = [player.get_rid()]   # ignore le joueur lui-même
+
+	var result := space_state.intersect_ray(query)
+	return not result.is_empty()
