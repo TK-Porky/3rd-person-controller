@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bam40egfi0rdw"]
+
+[ext_resource type="Texture2D" uid="uid://15wrsvnbhk5t" path="res://assets/particles_texture/light_01.png" id="1_bunsf"]
+
+[node name="BulletHole" type="Decal"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = ExtResource("1_bunsf")
+modulate = Color(0, 0, 0, 1)

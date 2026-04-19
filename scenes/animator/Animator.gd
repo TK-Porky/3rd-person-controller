@@ -7,13 +7,18 @@ func update_animation(player: Player) -> void:
 	var movement_state := player.movement_sm.current_state
 	var is_aiming      := player.is_aiming()
 	var is_crouching   := player.input.is_crouching
+	var is_firing      := player.is_firing()
 
-	_resolve_animation(movement_state, is_aiming, is_crouching)
+	_resolve_animation(movement_state, is_aiming, is_crouching, is_firing)
 
-func _resolve_animation(movement_state: PlayerState, is_aiming: bool, is_crouching: bool) -> void:
+func _resolve_animation(movement_state: PlayerState, is_aiming: bool, is_crouching: bool, is_firing: bool) -> void:
 
 	if movement_state is CoverState:
 		_play_cover_animation(movement_state, is_aiming)
+		return
+
+	if is_firing and not movement_state is CoverState:
+		play("pistol_aiming_idle")
 		return
 
 	if movement_state is JumpingState:

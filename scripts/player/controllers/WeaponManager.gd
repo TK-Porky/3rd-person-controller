@@ -6,6 +6,11 @@ class_name WeaponManager
 var current_weapon: WeaponData = null
 var current_weapon_instance: Node3D = null
 
+var _player: Player
+
+func _ready() -> void:
+	_player = get_parent() as Player
+
 func equip(weapon_data: WeaponData) -> void:
 	if current_weapon != null:
 		_drop_current_weapon()
@@ -28,10 +33,13 @@ func _spawn_weapon_in_hand() -> void:
 	
 	current_weapon_instance = current_weapon.scene.instantiate()
 	weapon_attachment.add_child(current_weapon_instance)
-	print(current_weapon.scene)
 	
 	current_weapon_instance.position = current_weapon.position_offset
 	current_weapon_instance.rotation_degrees = current_weapon.rotation_offset
+	
+	var muzzle_point := current_weapon_instance.get_node_or_null("MuzzlePoint")
+	if muzzle_point:
+		_player.vfx_manager.initialize(muzzle_point)
 
 func _drop_current_weapon() -> void:
 	if current_weapon.scene == null:

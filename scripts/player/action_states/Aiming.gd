@@ -2,14 +2,19 @@ extends PlayerState
 class_name AimingState
 
 func enter() -> void:
-	player.camera_controller.enter_aim_mode()
+	if not player.action_sm.previous_state is FiringState:
+		player.camera_controller.enter_aim_mode()
 
 func exit() -> void:
-	player.camera_controller.exit_aim_mode()
+	if not player.action_sm.next_state is FiringState:
+		player.camera_controller.exit_aim_mode()
 
 func update(_delta: float) -> void:
 	if not player.input.aim_pressed:
 		state_machine.transition_to(state_machine.get_node("Unarmed"))
+	
+	if player.input.shoot_pressed:
+		state_machine.transition_to(state_machine.get_node("Firing"))
 
 func physics_update(delta: float) -> void:
 	var cam_yaw := player.camera_controller.get_yaw()

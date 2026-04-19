@@ -27,6 +27,7 @@ class_name CameraController
 
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
+@onready var _fire_ray: RayCast3D = %FireRaycast
 
 enum CameraSide { RIGHT, LEFT }
 var _side: CameraSide = CameraSide.RIGHT
@@ -104,6 +105,10 @@ func _resolve_arm_length() -> float:
 		return crouch_length
 	return default_length
 
+func update_fire_raycast() -> void:
+	_fire_ray.target_position = Vector3(0, 0, -100.0)
+	_fire_ray.force_raycast_update()
+
 func enter_aim_mode() -> void:
 	_is_aiming = true
 
@@ -121,6 +126,9 @@ func get_camera_basis() -> Basis:
 
 func get_yaw() -> float:
 	return _yaw
+
+func get_fire_raycast() -> RayCast3D:
+	return _fire_ray
 
 func _swap_shoulder() -> void:
 	_is_swapping_active = not _is_swapping_active

@@ -30,10 +30,13 @@ var _nearby_interactable : Interactable = null
 @onready var movement_sm: PlayerStateMachine = %MovementStateMachine
 @onready var action_sm: PlayerStateMachine = %ActionStateMachine
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var camera_controller: CameraController = %CameraController
 @onready var skin: Animator = %Skin
 @onready var hud: HUD = $HUD
+
+# Controllers & Managers
+@onready var camera_controller: CameraController = %CameraController
 @onready var weapon_manager: WeaponManager = $WeaponManager
+@onready var vfx_manager: VFXManager = $VFXManager
 
 # Sensors
 @onready var sensors: Node3D = $Sensors
@@ -89,6 +92,9 @@ func is_aiming() -> bool:
 
 func is_grounded() -> bool:
 	return is_on_floor()
+
+func is_firing() -> bool:
+	return action_sm.current_state is FiringState
 
 func get_gravity_force() -> float:
 	return GRAVITY * gravity_multiplier

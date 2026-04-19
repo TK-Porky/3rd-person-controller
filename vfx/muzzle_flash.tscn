@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqsx5t3p7ujt3"]
+
+[ext_resource type="Script" uid="uid://cebf4ct3lfkas" path="res://scripts/vfx/muzzle_flash.gd" id="1_7q18k"]
+[ext_resource type="Texture2D" uid="uid://bxpmcae16uqa2" path="res://assets/particles_texture/muzzle_03.png" id="1_kus2j"]
+[ext_resource type="Texture2D" uid="uid://wxka6gsyxqki" path="res://assets/particles_texture/muzzle_02.png" id="2_7q18k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0isqr"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 0.29803923, 1)
+albedo_texture = ExtResource("1_kus2j")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v3n7i"]
+material = SubResource("StandardMaterial3D_0isqr")
+size = Vector2(1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dwjbt"]
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78o8b"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 0.24705882, 1)
+albedo_texture = ExtResource("1_kus2j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4sgq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2qxg6"]
+material = SubResource("StandardMaterial3D_y4sgq")
+size = Vector2(0.7, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1h3q"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 0.2784314, 1)
+albedo_texture = ExtResource("2_7q18k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuivk"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 0.31764707, 1)
+albedo_texture = ExtResource("2_7q18k")
+
+[node name="MuzzleFlash" type="Node3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+script = ExtResource("1_7q18k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.50431705)
+mesh = SubResource("PlaneMesh_v3n7i")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, -0.50431705)
+mesh = SubResource("PlaneMesh_dwjbt")
+surface_material_override/0 = SubResource("StandardMaterial3D_78o8b")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.35355338, -0.35355338, 0, 0.35355338, 0.35355338, 0, 0.1232861, -0.14379048)
+mesh = SubResource("PlaneMesh_2qxg6")
+surface_material_override/0 = SubResource("StandardMaterial3D_w1h3q")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.35355338, 0.35355338, 0, -0.35355338, 0.35355338, 0, -0.12722075, -0.14379048)
+mesh = SubResource("PlaneMesh_2qxg6")
+surface_material_override/0 = SubResource("StandardMaterial3D_yuivk")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.545431e-08, -0.35355338, 0.35355338, 0.5, -2.1855694e-08, 0, 1.545431e-08, 0.35355338, 0.35355338, -0.12246612, -0.003, -0.14379048)
+mesh = SubResource("PlaneMesh_2qxg6")
+surface_material_override/0 = SubResource("StandardMaterial3D_yuivk")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.545431e-08, -0.35355338, -0.35355338, 0.5, -2.1855694e-08, 0, -1.545431e-08, -0.35355338, 0.35355338, 0.12739247, -0.003, -0.14379048)
+mesh = SubResource("PlaneMesh_2qxg6")
+surface_material_override/0 = SubResource("StandardMaterial3D_yuivk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.18282789)
+light_color = Color(1, 1, 0.2627451, 1)
