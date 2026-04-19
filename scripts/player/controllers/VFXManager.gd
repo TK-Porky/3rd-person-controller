@@ -3,8 +3,13 @@ class_name VFXManager
 
 @export var impact_effect: PackedScene
 @export var muzzle_flash_scene: PackedScene
+@export var _weapon_ray: RayCast3D
 
 var _muzzle_flash: MuzzleFlash = null
+var _player: Player
+
+func _ready() -> void:
+	_player = get_parent() as Player
 
 func initialize(muzzle_point: Node3D) -> void:
 	if not muzzle_flash_scene: return
@@ -31,3 +36,11 @@ func spawn_impact(position: Vector3, normal: Vector3) -> void:
 
 	effect.global_transform.basis = decal_transform.basis.rotated( decal_transform.basis.x, -PI / 2.0)
 	effect.global_position = position + normal * 0.01
+
+func get_weapon_raycast() -> RayCast3D:
+	return _weapon_ray
+	
+func get_weapon_muzzle_position() -> Vector3:
+	if _muzzle_flash:
+		return _muzzle_flash.global_position
+	return _player.global_position

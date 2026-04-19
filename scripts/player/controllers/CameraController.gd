@@ -130,6 +130,15 @@ func get_yaw() -> float:
 func get_fire_raycast() -> RayCast3D:
 	return _fire_ray
 
+func get_camera_aim_point() -> Vector3:
+	_fire_ray.target_position = Vector3(0, 0, -100.0)
+	_fire_ray.force_raycast_update()
+
+	if _fire_ray.is_colliding():
+		return _fire_ray.get_collision_point()
+	else:
+		return camera.global_position + (-camera.global_basis.z * 100.0)
+
 func _swap_shoulder() -> void:
 	_is_swapping_active = not _is_swapping_active
 	

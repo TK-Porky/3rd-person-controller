@@ -33,6 +33,20 @@ func update(_delta: float) -> void:
 	if player.input.interact_pressed:
 		player.try_interact()
 		return
+	
+	if (_is_leaning or _is_popping_up) and player.input.shoot_pressed:
+		if player.weapon_manager.can_shoot():
+			player.action_sm.transition_to(
+				player.action_sm.get_node("Firing")
+			)
+		return
+	
+	if (_is_leaning or _is_popping_up) and player.input.reload_pressed:
+		if player.weapon_manager.can_reload():
+			player.action_sm.transition_to(
+				player.action_sm.get_node("Reloading")
+			)
+		return
 
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)

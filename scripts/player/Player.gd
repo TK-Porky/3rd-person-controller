@@ -102,6 +102,9 @@ func is_grounded() -> bool:
 func is_firing() -> bool:
 	return action_sm.current_state is FiringState
 
+func is_in_cover() -> bool:
+	return movement_sm.current_state is CoverState
+
 func is_reloading() -> bool:
 	return action_sm.current_state is ReloadingState
 

@@ -37,6 +37,11 @@ func _check_transitions() -> void:
 		state_machine.transition_to(state_machine.get_node("Jumping"))
 		return
 	
+	if player.is_near_cover() and player.input.cover_pressed:
+		player.input.cancel_crouch()
+		state_machine.transition_to(state_machine.get_node("Cover"))
+		return
+	
 	if not player.input.is_crouching and not player.head_detector.is_colliding():
 		var next := "Walking" if player.input.move_direction.length() > 0.1 else "Idle"
 		state_machine.transition_to(state_machine.get_node(next))

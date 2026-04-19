@@ -28,18 +28,6 @@ radius = 0.2
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 7
 script = ExtResource("1_g2els")
-move_speed = null
-sprint_speed = null
-acceleration = null
-jump_impusle = null
-gravity_multiplier = null
-rotation_speed = null
-normal_height = null
-crouch_height = null
-crouch_speed = null
-crouch_transition_speed = null
-cover_move_speed = null
-cover_snap_speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -214,11 +202,16 @@ script = ExtResource("8_smehm")
 player = NodePath("../..")
 skin = NodePath("../../Skin/Skeleton3D")
 
-[node name="VFXManager" type="Node" parent="."]
+[node name="VFXManager" type="Node" parent="." node_paths=PackedStringArray("_weapon_ray")]
 script = ExtResource("14_a8ls1")
 impact_effect = ExtResource("15_fulsm")
 muzzle_flash_scene = ExtResource("15_qfm1y")
+_weapon_ray = NodePath("WeaponRaycast")
 metadata/_custom_type_script = "uid://di4gggwx6gwlj"
+
+[node name="WeaponRaycast" type="RayCast3D" parent="VFXManager"]
+target_position = Vector3(0, 0, 100)
+collision_mask = 7
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("weapon_attachment")]
 script = ExtResource("13_f1ej7")
