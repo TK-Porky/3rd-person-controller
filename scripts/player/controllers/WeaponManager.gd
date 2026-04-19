@@ -5,6 +5,8 @@ class_name WeaponManager
 
 var current_weapon: WeaponData = null
 var current_weapon_instance: Node3D = null
+var current_ammo: int = 0
+var reserve_ammo: int = 0 
 
 var _player: Player
 
@@ -16,8 +18,24 @@ func equip(weapon_data: WeaponData) -> void:
 		_drop_current_weapon()
 	
 	current_weapon = weapon_data
-	print(current_weapon)
+	current_ammo = weapon_data.magazine_size
+	reserve_ammo = weapon_data.reserve_ammo
 	_spawn_weapon_in_hand()
+
+func can_shoot() -> bool:
+	return current_ammo > 0
+
+func consume_ammo() -> void:
+	current_ammo -= 1
+
+func can_reload() -> bool:
+	return reserve_ammo > 0 and current_ammo < current_weapon.magazine_size
+
+func reload() -> void:
+	var needed := current_weapon.magazine_size - current_ammo
+	var taken := mini(needed, reserve_ammo)
+	current_ammo += taken
+	reserve_ammo -= taken
 
 func drop() -> void:
 	if current_weapon == null:

@@ -8,10 +8,14 @@ func update_animation(player: Player) -> void:
 	var is_aiming      := player.is_aiming()
 	var is_crouching   := player.input.is_crouching
 	var is_firing      := player.is_firing()
+	var is_reloading   := player.is_reloading()
 
-	_resolve_animation(movement_state, is_aiming, is_crouching, is_firing)
+	_resolve_animation(movement_state, is_aiming, is_crouching, is_firing, is_reloading)
 
-func _resolve_animation(movement_state: PlayerState, is_aiming: bool, is_crouching: bool, is_firing: bool) -> void:
+func _resolve_animation(movement_state: PlayerState, is_aiming: bool, is_crouching: bool, is_firing: bool, is_reloading: bool) -> void:
+	if is_reloading:
+		play("reloading")
+		return
 
 	if movement_state is CoverState:
 		_play_cover_animation(movement_state, is_aiming)

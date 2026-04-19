@@ -28,6 +28,8 @@ func is_sprinting() -> bool:
 func _resolve_speed() -> float:
 	if player.is_aiming():
 		return player.move_speed * 0.5
+	if player.is_reloading():
+		return player.move_speed * 0
 	if player.input.is_sprinting:
 		return player.sprint_speed
 	return player.move_speed
@@ -48,12 +50,6 @@ func _check_transitions(dir: Vector3) -> void:
 	if dir.length() < 0.1:
 		state_machine.transition_to(state_machine.get_node("Idle"))
 		return
-
-func _update_animation() -> void:
-	if player.input.is_sprinting:
-		player.skin.stand_running()
-		return
-	player.skin.stand_walking()
 
 func _get_camera_relative_direction() -> Vector3:
 	var cam_basis := player.camera_controller.get_camera_basis()

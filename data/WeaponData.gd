@@ -9,6 +9,7 @@ class_name WeaponData
 @export var is_automatic: bool = false
 @export var fire_rate: float = 0.2
 @export var magazine_size: int = 15
+@export var reserve_ammo: int = 60
 @export var damage: float = 25.0
 
 @export_category("Hand Position")

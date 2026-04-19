@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://din1gf5m4nsjh"]
+[gd_scene load_steps=22 format=3 uid="uid://din1gf5m4nsjh"]
 
 [ext_resource type="Script" uid="uid://dcu4wrxe8w5rg" path="res://scripts/player/Player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://cyd77ykfhqlke" path="res://scenes/animator/AnimatorSkin.tscn" id="2_g2els"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c3kr4mvn5318j" path="res://scenes/hud/hud.tscn" id="12_3v2ag"]
 [ext_resource type="Script" uid="uid://32fl127bxjj6" path="res://scripts/player/action_states/Aiming.gd" id="12_f1ej7"]
 [ext_resource type="Script" uid="uid://e8t2kg6c2xk0" path="res://scripts/player/action_states/Firing.gd" id="12_oprun"]
+[ext_resource type="Script" uid="uid://dkhmj57mqbwbb" path="res://scripts/player/action_states/Reloading.gd" id="13_4r5pv"]
 [ext_resource type="Script" uid="uid://j0kwnff558g3" path="res://scripts/player/controllers/WeaponManager.gd" id="13_f1ej7"]
 [ext_resource type="Script" uid="uid://di4gggwx6gwlj" path="res://scripts/player/controllers/VFXManager.gd" id="14_a8ls1"]
 [ext_resource type="PackedScene" uid="uid://bam40egfi0rdw" path="res://vfx/bullet_hole.tscn" id="15_fulsm"]
@@ -27,6 +28,18 @@ radius = 0.2
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 7
 script = ExtResource("1_g2els")
+move_speed = null
+sprint_speed = null
+acceleration = null
+jump_impusle = null
+gravity_multiplier = null
+rotation_speed = null
+normal_height = null
+crouch_height = null
+crouch_speed = null
+crouch_transition_speed = null
+cover_move_speed = null
+cover_snap_speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -91,7 +104,7 @@ bones/62/rotation = Quaternion(0.5654397, 0.01134508, -0.008516356, 0.82466763)
 bones/63/rotation = Quaternion(0.2890855, 0.031890564, 0.014079447, 0.9566684)
 
 [node name="WeaponAttachment" parent="Skin/Skeleton3D" index="2"]
-transform = Transform3D(0.467519, 0.10679531, 0.8775081, -0.012177303, -0.9918033, 0.12719327, 0.88389903, -0.07015099, -0.46238637, -0.18547139, 0.7698209, 0.034176808)
+transform = Transform3D(0.467519, 0.10679531, 0.8775081, -0.012177303, -0.9918033, 0.12719327, 0.88389903, -0.07015099, -0.46238637, -0.18808821, -0.22013852, 0.035440233)
 
 [node name="AnimationTree" parent="Skin" index="2"]
 parameters/stand_movement/blend_position = Vector2(0, 0)
@@ -188,6 +201,10 @@ metadata/_custom_type_script = "uid://bpw4g6k1oxm2f"
 
 [node name="Firing" type="Node" parent="ActionStateMachine"]
 script = ExtResource("12_oprun")
+metadata/_custom_type_script = "uid://bpw4g6k1oxm2f"
+
+[node name="Reloading" type="Node" parent="ActionStateMachine"]
+script = ExtResource("13_4r5pv")
 metadata/_custom_type_script = "uid://bpw4g6k1oxm2f"
 
 [node name="Components" type="Node" parent="."]

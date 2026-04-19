@@ -60,7 +60,8 @@ func _setup_debug() -> void:
 	var panel: DebugPanel = get_node_or_null("HUD/MarginContainer/DebugPanel")
 	if not panel: return
 	
-	panel.register("state", func(): return movement_sm.current_state.name)
+	panel.register("movement state", func(): return movement_sm.current_state.name)
+	panel.register("action state", func(): return action_sm.current_state.name)
 	panel.register("velocity", func(): return velocity)
 	panel.register("speed_xz", func(): return Vector3(velocity.x, 0.0, velocity.z))
 	panel.register("grounded", func(): return is_on_floor())
@@ -76,6 +77,11 @@ func _process(delta: float) -> void:
 	movement_sm.update(delta)
 	action_sm.update(delta)
 	skin.update_animation(self)
+	if weapon_manager.has_weapon():
+		hud.show_weapon_display()
+		hud.update_ammo(weapon_manager.current_ammo, weapon_manager.reserve_ammo)
+	else:
+		hud.hide_weapon_display()
 
 func _physics_process(delta: float) -> void:
 	movement_sm.physics_update(delta)
@@ -95,6 +101,9 @@ func is_grounded() -> bool:
 
 func is_firing() -> bool:
 	return action_sm.current_state is FiringState
+
+func is_reloading() -> bool:
+	return action_sm.current_state is ReloadingState
 
 func get_gravity_force() -> float:
 	return GRAVITY * gravity_multiplier

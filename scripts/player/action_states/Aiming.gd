@@ -12,9 +12,15 @@ func exit() -> void:
 func update(_delta: float) -> void:
 	if not player.input.aim_pressed:
 		state_machine.transition_to(state_machine.get_node("Unarmed"))
+		return
+	
+	if player.input.reload_pressed and player.weapon_manager.can_reload():
+		state_machine.transition_to(state_machine.get_node("Reloading"))
+		return
 	
 	if player.input.shoot_pressed:
 		state_machine.transition_to(state_machine.get_node("Firing"))
+		return
 
 func physics_update(delta: float) -> void:
 	var cam_yaw := player.camera_controller.get_yaw()
