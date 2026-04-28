@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://din1gf5m4nsjh"]
+[gd_scene load_steps=25 format=3 uid="uid://din1gf5m4nsjh"]
 
 [ext_resource type="Script" uid="uid://dcu4wrxe8w5rg" path="res://scripts/player/Player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://cyd77ykfhqlke" path="res://scenes/animator/AnimatorSkin.tscn" id="2_g2els"]
+[ext_resource type="Script" uid="uid://ckdq2ks7mglrm" path="res://scripts/player/PlayerAnimator.gd" id="3_a38lo"]
 [ext_resource type="Script" uid="uid://b46l040ld6ph7" path="res://scripts/player/controllers/CameraController.gd" id="3_f1ej7"]
 [ext_resource type="Script" uid="uid://clwn4yu6kclky" path="res://scripts/player/PlayerStateMachine.gd" id="4_f1ej7"]
 [ext_resource type="Script" uid="uid://bmofbtfj7wwqe" path="res://scripts/player/movement_states/Idle.gd" id="4_tuyoq"]
@@ -11,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dj37ikonuay57" path="res://scripts/player/movement_states/Cover.gd" id="8_ur7pv"]
 [ext_resource type="Script" uid="uid://cui33p52bifoo" path="res://scripts/player/movement_states/Crouching.gd" id="10_f1ej7"]
 [ext_resource type="Script" uid="uid://bhbtxnpsd7hta" path="res://scripts/player/action_states/Unarmed.gd" id="11_jej6c"]
-[ext_resource type="PackedScene" uid="uid://c3kr4mvn5318j" path="res://scenes/hud/hud.tscn" id="12_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://c3kr4mvn5318j" path="res://scenes/ui/hud.tscn" id="12_3v2ag"]
 [ext_resource type="Script" uid="uid://32fl127bxjj6" path="res://scripts/player/action_states/Aiming.gd" id="12_f1ej7"]
 [ext_resource type="Script" uid="uid://e8t2kg6c2xk0" path="res://scripts/player/action_states/Firing.gd" id="12_oprun"]
 [ext_resource type="Script" uid="uid://dkhmj57mqbwbb" path="res://scripts/player/action_states/Reloading.gd" id="13_4r5pv"]
@@ -19,6 +20,8 @@
 [ext_resource type="Script" uid="uid://di4gggwx6gwlj" path="res://scripts/player/controllers/VFXManager.gd" id="14_a8ls1"]
 [ext_resource type="PackedScene" uid="uid://bam40egfi0rdw" path="res://vfx/bullet_hole.tscn" id="15_fulsm"]
 [ext_resource type="PackedScene" uid="uid://bqsx5t3p7ujt3" path="res://vfx/muzzle_flash.tscn" id="15_qfm1y"]
+[ext_resource type="AudioStream" uid="uid://bv4wd806hjmf8" path="res://assets/sounds/freesound_community-9mm-pistol-load-and-chamber-98830.mp3" id="18_i4ail"]
+[ext_resource type="AudioStream" uid="uid://d3rfg0vfwy6wo" path="res://assets/sounds/freesound_community-9mm-pistol-shot-6349.mp3" id="19_a38lo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.2
@@ -36,6 +39,7 @@ shape = SubResource("CapsuleShape3D_g2els")
 [node name="Skin" parent="." instance=ExtResource("2_g2els")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("3_a38lo")
 
 [node name="Skeleton3D" parent="Skin" index="0"]
 bones/0/rotation = Quaternion(-0.03130765, -0.04653642, -0.029024545, 0.9980039)
@@ -92,7 +96,7 @@ bones/62/rotation = Quaternion(0.5654397, 0.01134508, -0.008516356, 0.82466763)
 bones/63/rotation = Quaternion(0.2890855, 0.031890564, 0.014079447, 0.9566684)
 
 [node name="WeaponAttachment" parent="Skin/Skeleton3D" index="2"]
-transform = Transform3D(0.467519, 0.10679531, 0.8775081, -0.012177303, -0.9918033, 0.12719327, 0.88389903, -0.07015099, -0.46238637, -0.18808821, -0.22013852, 0.035440233)
+transform = Transform3D(0.467519, 0.10679531, 0.8775081, -0.012177303, -0.9918033, 0.12719327, 0.88389903, -0.07015099, -0.46238637, -0.18808821, 0.77786136, 0.035440233)
 
 [node name="AnimationTree" parent="Skin" index="2"]
 parameters/stand_movement/blend_position = Vector2(0, 0)
@@ -212,6 +216,14 @@ metadata/_custom_type_script = "uid://di4gggwx6gwlj"
 [node name="WeaponRaycast" type="RayCast3D" parent="VFXManager"]
 target_position = Vector3(0, 0, 100)
 collision_mask = 7
+
+[node name="SFXManager" type="Node" parent="."]
+
+[node name="PistolReload" type="AudioStreamPlayer" parent="SFXManager"]
+stream = ExtResource("18_i4ail")
+
+[node name="PistolShoot" type="AudioStreamPlayer" parent="SFXManager"]
+stream = ExtResource("19_a38lo")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("weapon_attachment")]
 script = ExtResource("13_f1ej7")

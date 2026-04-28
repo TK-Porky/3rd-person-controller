@@ -1,0 +1,110 @@
+[gd_scene load_steps=17 format=3 uid="uid://c5xj2gmq238u"]
+
+[ext_resource type="Script" uid="uid://do2388d2g07to" path="res://scripts/guard/Guard.gd" id="1_k0dx2"]
+[ext_resource type="PackedScene" uid="uid://cyd77ykfhqlke" path="res://scenes/animator/AnimatorSkin.tscn" id="1_m4fl1"]
+[ext_resource type="Script" uid="uid://bi8qgxfuwu271" path="res://scripts/guard/GuardStateMachine.gd" id="2_ci2qi"]
+[ext_resource type="Script" uid="uid://c87kpl7wdnlqh" path="res://scripts/guard/GuardAnimator.gd" id="3_17ufb"]
+[ext_resource type="Script" uid="uid://8v860dy5ijqs" path="res://scripts/guard/components/VisionComponent.gd" id="3_ywdc2"]
+[ext_resource type="PackedScene" uid="uid://b21wmairl0bvp" path="res://scenes/weapons/p9mm.tscn" id="4_nflhy"]
+[ext_resource type="Script" uid="uid://bes7skuhd7f1m" path="res://scripts/guard/components/HearingComponent.gd" id="4_vd6r2"]
+[ext_resource type="Script" uid="uid://cs4g2ugjxmyue" path="res://scripts/guard/states/PatrolState.gd" id="4_ygo2t"]
+[ext_resource type="Script" uid="uid://cwe8e6k6v682f" path="res://scripts/guard/states/AlertState.gd" id="5_gn8tx"]
+[ext_resource type="Script" uid="uid://krnijrwy7n40" path="res://scripts/guard/states/ChaseState.gd" id="6_5dfqo"]
+[ext_resource type="Script" uid="uid://pme1c08wubyg" path="res://scripts/guard/states/SearchState.gd" id="8_c4sgu"]
+[ext_resource type="Script" uid="uid://dp4q57xequttb" path="res://scripts/guard/states/AttackState.gd" id="9_rmy4q"]
+[ext_resource type="FontFile" uid="uid://dp1vo65qwlabv" path="res://assets/fonts/Special_Elite/SpecialElite-Regular.ttf" id="11_lpkwa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ci2qi"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0dx2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ywdc2"]
+radius = 8.0
+
+[node name="Guard" type="CharacterBody3D"]
+collision_mask = 7
+script = ExtResource("1_k0dx2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ci2qi")
+
+[node name="Animator" parent="." instance=ExtResource("1_m4fl1")]
+unique_name_in_owner = true
+script = ExtResource("3_17ufb")
+
+[node name="Skeleton3D" parent="Animator" index="0"]
+bones/13/rotation = Quaternion(0.027178556, 0.017916089, 0.21836758, 0.9753235)
+bones/17/rotation = Quaternion(0.20703425, -4.1527542e-08, -0.02121621, 0.97810364)
+bones/21/rotation = Quaternion(0.33513075, -2.8126232e-07, -0.03434313, 0.9415455)
+bones/25/rotation = Quaternion(0.17301062, 1.1096935e-07, -0.017729562, 0.98476046)
+bones/37/rotation = Quaternion(-0.2721503, -0.018244453, 0.40783507, 0.8713621)
+bones/41/rotation = Quaternion(0.43098664, 3.0737843e-07, 0.035109196, 0.90167505)
+bones/45/rotation = Quaternion(0.1627596, 6.8017684e-08, 0.013258764, 0.9865767)
+bones/49/rotation = Quaternion(0.41710043, 2.5121966e-07, 0.03397792, 0.90822506)
+
+[node name="Alpha_Surface" parent="Animator/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_k0dx2")
+
+[node name="WeaponAttachment" parent="Animator/Skeleton3D" index="2"]
+transform = Transform3D(0.38727832, -0.77455044, 0.50008696, 0.22363973, -0.44729427, -0.865975, 0.8944276, 0.44721267, -7.1458767e-06, -0.81246763, 1.3926934, -0.0104643535)
+
+[node name="P9mm" parent="Animator/Skeleton3D/WeaponAttachment" index="0" instance=ExtResource("4_nflhy")]
+transform = Transform3D(0.04095946, 0.09121237, -0.0016207437, 0.014008991, -0.004533299, 0.098910056, 0.09014472, -0.04074007, -0.014634747, -0.023937257, 0.032913685, -0.014553258)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+path_max_distance = 3.01
+avoidance_enabled = true
+radius = 0.4
+max_speed = 2.0
+
+[node name="GuardStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ci2qi")
+initial_state = NodePath("Patrol")
+metadata/_custom_type_script = "uid://bi8qgxfuwu271"
+
+[node name="Patrol" type="Node" parent="GuardStateMachine"]
+script = ExtResource("4_ygo2t")
+metadata/_custom_type_script = "uid://s48jb53a3b1u"
+
+[node name="Alert" type="Node" parent="GuardStateMachine"]
+script = ExtResource("5_gn8tx")
+metadata/_custom_type_script = "uid://s48jb53a3b1u"
+
+[node name="Chase" type="Node" parent="GuardStateMachine"]
+script = ExtResource("6_5dfqo")
+metadata/_custom_type_script = "uid://s48jb53a3b1u"
+
+[node name="Search" type="Node" parent="GuardStateMachine"]
+script = ExtResource("8_c4sgu")
+metadata/_custom_type_script = "uid://s48jb53a3b1u"
+
+[node name="Attack" type="Node" parent="GuardStateMachine"]
+script = ExtResource("9_rmy4q")
+metadata/_custom_type_script = "uid://s48jb53a3b1u"
+
+[node name="DetectionSystem" type="Node3D" parent="."]
+
+[node name="HearingComponent" type="Area3D" parent="DetectionSystem"]
+script = ExtResource("4_vd6r2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionSystem/HearingComponent"]
+shape = SubResource("SphereShape3D_ywdc2")
+
+[node name="VisionComponent" type="Node3D" parent="DetectionSystem"]
+script = ExtResource("3_ywdc2")
+
+[node name="RayCast3D" type="RayCast3D" parent="DetectionSystem/VisionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2928779, 0)
+target_position = Vector3(0, 0, 8)
+collision_mask = 7
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0789633, 0)
+billboard = 2
+text = "STATE"
+font = ExtResource("11_lpkwa")
+
+[editable path="Animator"]

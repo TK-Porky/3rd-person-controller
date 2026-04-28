@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6ejj7pe0esai"]
+
+[ext_resource type="Script" uid="uid://dtjwjc6jcm5bt" path="res://scripts/DocumentInteractable.gd" id="1_wddmh"]
+[ext_resource type="Resource" uid="uid://qdoeoe1e6np6" path="res://data/resources/items/TopDocument.tres" id="2_wgh6w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wgh6w"]
+radius = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3cyr"]
+albedo_color = Color(1, 1, 0.42352942, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p7rnb"]
+material = SubResource("StandardMaterial3D_q3cyr")
+size = Vector3(0.35, 0.01, 0.5)
+
+[node name="ConfidentialDocument" type="Area3D"]
+script = ExtResource("1_wddmh")
+item_data = ExtResource("2_wgh6w")
+metadata/_custom_type_script = "uid://dtjwjc6jcm5bt"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wgh6w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p7rnb")
+skeleton = NodePath("../CollisionShape3D")

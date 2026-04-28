@@ -10,9 +10,10 @@ func _ready() -> void:
 		interaction_label = "Pickup " + weapon_data.weapon_name
 
 func _on_interact() -> void:
-	var player := get_tree().get_first_node_in_group("player")
+	var player: Player = get_tree().get_first_node_in_group("player")
 	if not player:
 		return
 	player.weapon_manager.equip(weapon_data)
+	player.pistol_reload.play(1.5)
 	print(weapon_data)
 	queue_free()

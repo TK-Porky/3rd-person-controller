@@ -155,7 +155,7 @@ func _handle_cover_movement() -> void:
 	player.move_and_slide()
 
 func _handle_lean(delta: float) -> void:
-	var wants_aim := player.input.aim_pressed
+	var wants_aim := player.input.aim_pressed and player.weapon_manager.has_weapon()
 	var wall_right := _cover_normal.cross(Vector3.UP).normalized()
 	
 	if not wants_aim:

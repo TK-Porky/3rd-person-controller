@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7g2exocuj1eo"]
+
+[ext_resource type="Script" uid="uid://jlu7bxj5clf3" path="res://scripts/WeaponPickup.gd" id="1_eluaw"]
+[ext_resource type="PackedScene" uid="uid://b21wmairl0bvp" path="res://scenes/weapons/p9mm.tscn" id="2_eluaw"]
+[ext_resource type="Resource" uid="uid://bdb6cy3dkmswy" path="res://data/resources/weapons/pistol.tres" id="2_ke6uu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cyuvl"]
+
+[node name="PistolPickup" type="Area3D"]
+script = ExtResource("1_eluaw")
+weapon_data = ExtResource("2_ke6uu")
+metadata/_custom_type_script = "uid://jlu7bxj5clf3"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cyuvl")
+
+[node name="P9mm" parent="." instance=ExtResource("2_eluaw")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)

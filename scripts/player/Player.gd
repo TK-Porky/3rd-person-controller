@@ -5,8 +5,8 @@ class_name Player
 @export_category("Movement")
 @export var move_speed := 3.0
 @export var sprint_speed := 5.0
-@export var acceleration := 5.0
-@export var jump_impusle := 8.0
+@export var acceleration := 50.0
+@export var jump_impusle := 12.0
 @export var gravity_multiplier := 1.0
 @export var rotation_speed := 12.0
 
@@ -24,13 +24,14 @@ class_name Player
 var input: PlayerInput
 var last_move_direction := Vector3.BACK
 
+# Interaction System
 var _nearby_interactable : Interactable = null
 
 # Nodes
 @onready var movement_sm: PlayerStateMachine = %MovementStateMachine
 @onready var action_sm: PlayerStateMachine = %ActionStateMachine
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var skin: Animator = %Skin
+@onready var skin: PlayerAnimator = %Skin
 @onready var hud: HUD = $HUD
 
 # Controllers & Managers
@@ -46,6 +47,9 @@ var _nearby_interactable : Interactable = null
 @onready var head_detector: RayCast3D = %HeadDetector
 @onready var top_detector: RayCast3D = %TopDetector
 
+@onready var pistol_reload: AudioStreamPlayer = $SFXManager/PistolReload
+@onready var pistol_shoot: AudioStreamPlayer = $SFXManager/PistolShoot
+
 # Game Physics
 const GRAVITY: float = -36.0
 
@@ -57,6 +61,7 @@ func _ready() -> void:
 	_setup_debug()
 
 func _setup_debug() -> void:
+	hud.show_notification("Test the Game")
 	var panel: DebugPanel = get_node_or_null("HUD/MarginContainer/DebugPanel")
 	if not panel: return
 	
@@ -146,7 +151,7 @@ func cancel_crouch() -> void:
 
 func on_interactable_nearby(interactable: Interactable) -> void:
 	_nearby_interactable = interactable
-	hud.show_interaction_prompt(interactable.interaction_label)
+	hud.show_interaction_prompt(_nearby_interactable, interactable.interaction_label)
 
 func on_interactable_left() -> void:
 	_nearby_interactable = null

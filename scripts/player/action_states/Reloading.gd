@@ -9,6 +9,7 @@ var _came_from_aiming := false
 func enter() -> void:
 	_timer = RELOAD_DURATION
 	_came_from_aiming = player.action_sm.previous_state is AimingState or player.action_sm.previous_state is FiringState
+	player.pistol_reload.play()
 
 func update(delta: float) -> void:
 	_timer -= delta

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://bdb6cy3dkmswy"]
+
+[ext_resource type="PackedScene" uid="uid://b21wmairl0bvp" path="res://scenes/weapons/p9mm.tscn" id="1_0bnye"]
+[ext_resource type="Script" uid="uid://blrmhbsxcarvu" path="res://data/WeaponData.gd" id="1_puek3"]
+
+[resource]
+script = ExtResource("1_puek3")
+weapon_name = "p9mm"
+scene = ExtResource("1_0bnye")
+pickup_scene_path = "res://scenes/weapons/p9mm/pickup_p9mm.tscn"
+position_offset = Vector3(-0.02, 0.032, -0.026)
+rotation_offset = Vector3(-75, -153.1, 87.1)
+metadata/_custom_type_script = "uid://blrmhbsxcarvu"

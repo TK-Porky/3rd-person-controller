@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b21wmairl0bvp"]
+
+[ext_resource type="PackedScene" uid="uid://0svvguljgohp" path="res://assets/modals/guns/pistols/p9mm/9mm_c10_pistol.glb" id="1_xb1cb"]
+
+[node name="P9mm" instance=ExtResource("1_xb1cb")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="MuzzlePoint" type="Marker3D" parent="." index="1"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.5726377e-08, 0.54608333, 1.3752656)

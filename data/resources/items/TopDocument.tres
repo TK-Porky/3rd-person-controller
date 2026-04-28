@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://qdoeoe1e6np6"]
+
+[ext_resource type="Texture2D" uid="uid://33005xr3mcd6" path="res://assets/2D/vintage_paper_by_darkwood67.jpg" id="1_bpunn"]
+[ext_resource type="Script" uid="uid://sh7i7gjb27jg" path="res://data/ItemData.gd" id="1_svpm4"]
+
+[resource]
+script = ExtResource("1_svpm4")
+item_name = "Dossier #77-B"
+has_document = true
+document_title = "Operations Report - Sector 7"
+document_body = "[b]SUBJECT: Relocation Report – Subject of Interest “OMEGA-4” DATE: May 14, 2021 (Archived) STATUS: Classified - Security Level 4 Required[/b]
+
+SUMMARY OF OPERATIONS
+
+Following the incident of April 12, 2021, the subject previously identified as Emma Braud was successfully extracted from the initial surveillance area. Despite civilian resistance observed on site, the “Fog” protocol was implemented.
+Eyewitnesses were treated according to standard procedure (Class B Amnestic). The official record now lists the subject as “Missing - Presumed Deceased” to close the local authorities’ investigation.
+
+LOCATION AND TRANSFER
+
+The subject has been transferred to the Underground Research Complex at L’Archipel, Containment Sector 03. She exhibits neurological predispositions compatible with the PANDORA program.
+
+Health Status: Stable.
+
+Observation: The subject stopped asking about their family after the seventh day of conditioning.
+
+Handwritten note (added in the margin): \"Ensure the original is destroyed as soon as extraction is confirmed. This document must remain confidential at all costs.\""
+document_image = ExtResource("1_bpunn")

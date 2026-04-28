@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3rd Person Controller"
-run/main_scene="uid://ihyysdapv1x1"
+run/main_scene="uid://drcdclsfqvfy0"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

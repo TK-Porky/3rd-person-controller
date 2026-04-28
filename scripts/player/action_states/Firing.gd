@@ -30,6 +30,7 @@ func _execute_shot() -> void:
 	var weapon := player.weapon_manager.current_weapon
 	_fire_timer = weapon.fire_rate
 	player.weapon_manager.consume_ammo()
+	player.pistol_shoot.play()
 	
 	var aim_point := player.camera_controller.get_camera_aim_point()
 	

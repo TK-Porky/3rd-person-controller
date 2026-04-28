@@ -1,0 +1,255 @@
+[gd_scene load_steps=13 format=3 uid="uid://j1xkbhunpo5g"]
+
+[ext_resource type="Script" uid="uid://bymk1jvnckug8" path="res://scripts/Hud/DocumentScreen.gd" id="1_iwje3"]
+[ext_resource type="FontFile" uid="uid://dp1vo65qwlabv" path="res://assets/fonts/Special_Elite/SpecialElite-Regular.ttf" id="2_hyl6b"]
+[ext_resource type="FontFile" uid="uid://bnw0b5mxo0dvn" path="res://assets/fonts/Courier_Prime/CourierPrime-Regular.ttf" id="2_lioqe"]
+[ext_resource type="FontFile" uid="uid://dhs4jn31f1o1q" path="res://assets/fonts/Courier_Prime/CourierPrime-Bold.ttf" id="3_hyl6b"]
+[ext_resource type="FontFile" uid="uid://bjtsmw3eh0jvi" path="res://assets/fonts/Courier_Prime/CourierPrime-BoldItalic.ttf" id="4_c435v"]
+[ext_resource type="FontFile" uid="uid://ca00m8ytfm5vh" path="res://assets/fonts/Courier_Prime/CourierPrime-Italic.ttf" id="5_6vqbv"]
+
+[sub_resource type="Gradient" id="Gradient_ryonw"]
+colors = PackedColorArray(0.9411765, 0.9019608, 0.78431374, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1uuqp"]
+gradient = SubResource("Gradient_ryonw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c435v"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.54509807, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tp5bw"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.64705884)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vqbv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.72156864, 0.47843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyl6b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78431374, 0.72156864, 0.47843137, 1)
+
+[node name="DocumentScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_iwje3")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47058824)
+
+[node name="DocumentImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.1779514
+anchor_top = 0.09876543
+anchor_right = 0.5642361
+anchor_bottom = 0.8904321
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_1uuqp")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="DocumentImage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentImage/MarginContainer"]
+layout_mode = 2
+
+[node name="PDocumentTitle" type="RichTextLabel" parent="DocumentImage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.47843137, 0.3764706, 0.1882353, 1)
+theme_override_fonts/normal_font = ExtResource("2_hyl6b")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "Document Title
+"
+
+[node name="PDocumentBody" type="RichTextLabel" parent="DocumentImage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_hyl6b")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "Document Content"
+scroll_active = false
+
+[node name="PDocumentFooter" type="RichTextLabel" parent="DocumentImage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.47843137, 0.3764706, 0.1882353, 1)
+theme_override_fonts/normal_font = ExtResource("2_hyl6b")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "- Author"
+scroll_active = false
+
+[node name="Stamp" type="Label" parent="DocumentImage"]
+layout_mode = 0
+anchor_left = 0.66067415
+anchor_top = 0.0136452215
+anchor_right = 0.9666619
+anchor_bottom = 0.113939874
+offset_right = 5.8354797
+offset_bottom = -19.451157
+rotation = 0.13962634
+theme_override_colors/font_color = Color(0.54509807, 0.101960786, 0.101960786, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_lioqe")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_c435v")
+text = "CONFIDENTIEL"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.7335069
+anchor_top = 0.00077160494
+anchor_right = 1.0
+anchor_bottom = 0.9992284
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tp5bw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Reader" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="RichTextLabel" parent="Panel/Reader"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_lioqe")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+bbcode_enabled = true
+text = "Document Title
+"
+
+[node name="Body" type="RichTextLabel" parent="Panel/Reader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("2_lioqe")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+bbcode_enabled = true
+text = "Document Content"
+scroll_active = false
+scroll_following_visible_characters = true
+
+[node name="Footer" type="RichTextLabel" parent="Panel/Reader"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_lioqe")
+theme_override_fonts/bold_font = ExtResource("3_hyl6b")
+theme_override_fonts/bold_italics_font = ExtResource("4_c435v")
+theme_override_fonts/italics_font = ExtResource("5_6vqbv")
+bbcode_enabled = true
+text = "Page 1/1
+"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/Reader"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Panel/Reader/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="InteractionKey" type="Button" parent="Panel/Reader/ButtonsContainer/ButtonContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.72156864, 0.47843137, 1)
+theme_override_fonts/font = ExtResource("2_lioqe")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6vqbv")
+text = "DESTROY"
+
+[node name="KeyPrompt" type="Label" parent="Panel/Reader/ButtonsContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lioqe")
+theme_override_font_sizes/font_size = 14
+text = "[F]"
+horizontal_alignment = 1
+
+[node name="ButtonContainer2" type="VBoxContainer" parent="Panel/Reader/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="InteractionKey" type="Button" parent="Panel/Reader/ButtonsContainer/ButtonContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.72156864, 0.47843137, 1)
+theme_override_fonts/font = ExtResource("2_lioqe")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_hyl6b")
+text = "CLOSE"
+
+[node name="KeyPrompt" type="Label" parent="Panel/Reader/ButtonsContainer/ButtonContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lioqe")
+theme_override_font_sizes/font_size = 14
+text = "[ESC]"
+horizontal_alignment = 1
